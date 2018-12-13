@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Search, :type => :model do
   
-  before(:suite) do
+  before(:all) do
     @search = create(:search, :with_certain_criteria)
   end
   
@@ -21,7 +21,7 @@ RSpec.describe Search, :type => :model do
     expect(search).to_not be_valid
   end
 
-  it "is has unique criteria" do
+  it "must have unique criteria" do
     search = build(:search, :with_certain_criteria)
     expect(search).to_not be_valid
   end
