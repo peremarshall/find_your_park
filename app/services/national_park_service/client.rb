@@ -12,7 +12,16 @@ module NationalParkService
       endpoint << "&q="       + search_term if search_term
       endpoint << "&limit="   + limit.to_s if limit
       http = Curl.get(endpoint)
-      http.body_str
+      parse_parks(http.body_str)
+    end
+
+    def parse_parks(results)
+      parks      = []
+      parks_json = JSON.parse(results)
+      parks_json["data"].each do |park_json|
+        parks << NationalParkService::Park.new(park_json)
+      end
+      return parks
     end
   end
 end
