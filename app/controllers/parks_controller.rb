@@ -1,4 +1,5 @@
 class ParksController < ApplicationController
+  include CriteriaBuilder
 
   def index
     criteria = build_criteria(params)
@@ -26,18 +27,6 @@ class ParksController < ApplicationController
   end
 
   private
-
-  def build_criteria(params)
-    if params[:q].instance_values["parameters"]
-      criteria = params[:q].instance_values["parameters"].to_hash
-    else
-      criteria = {}
-    end
-
-    criteria["per_page"] = params["per_page"]
-    criteria["page"]     = params["page"]
-    return criteria.sort.to_s
-  end
 
   def update_park(nps_park)
     park = Park.find_or_create_by(uuid: nps_park.uuid)
