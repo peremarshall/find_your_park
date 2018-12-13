@@ -1,24 +1,22 @@
-# README
+# Find Your Park
+Inspired by the National Park Service's "Find Your Park" campaign, this API draws from the [NPS API](https://www.nps.gov/subjects/developer/api-documentation.htm) and enhances the functionality by adding support for...
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* advanced searches
+* result caching
+* sorting by distance
 
-Things you may want to cover:
+### Searching/Sorting
 
-* Ruby version
+Searching and sorting are powered by [Ransack](https://github.com/activerecord-hackery/ransack) and can be used on all model attributes. Their documentation provides a [full mapping](https://github.com/activerecord-hackery/ransack/blob/master/lib/ransack/locale/en.yml#L15) of the matchers that are available.
 
-* System dependencies
+### Geolocation
 
-* Configuration
+Distance search uses the `near` query parameter and is supported by [Geocoder](https://github.com/alexreisner/geocoder), and can accept inputs such as city names (i.e. Omaha, NE) or coordinates (i.e. [40.71, -100.23]). 
 
-* Database creation
+### Examples
 
-* Database initialization
+##### #index
+ex. https://find-your-park.herokuapp.com/parks.json?q[description_cont]=prairie&near=Omaha,%20NE&radius=500
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+##### #show
+ex. https://find-your-park.herokuapp.com/parks/484.json
