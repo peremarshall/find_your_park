@@ -1,5 +1,28 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe Search, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Search, :type => :model do
+  
+  before(:suite) do
+    @search = create(:search, :with_certain_criteria)
+  end
+  
+  it "is valid with valid attributes" do
+    search = build(:search, :with_different_criteria)
+    expect(search).to be_valid
+  end
+
+  it "is not valid without a searchable type" do
+    search = build(:search, :with_different_criteria, searchable_type: nil)
+    expect(search).to_not be_valid
+  end
+
+  it "is not valid without criteria" do
+    search = build(:search, criteria: nil)
+    expect(search).to_not be_valid
+  end
+
+  it "is has unique criteria" do
+    search = build(:search, :with_certain_criteria)
+    expect(search).to_not be_valid
+  end
 end
