@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Search, :type => :model do
   
-  before(:all) do
+  before(:suite) do
     @search = create(:search, :with_certain_criteria)
   end
   
