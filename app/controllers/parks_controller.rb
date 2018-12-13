@@ -6,7 +6,12 @@ class ParksController < ApplicationController
     search = Search.where(searchable_type: "Park", criteria: criteria).first_or_create
 
     @parks = Rails.cache.fetch("searches/" + search.id.to_s, expires_in: 12.hours) do
-      Park.ransack(params[:q]).result.page(params[:page]).per(params[:per_page]).to_a
+      if params[:near]
+        radius = params[:radius] ? params[:radius] : 100
+        Park.ransack(params[:q]).result.near(params[:near], radius).page(params[:page]).per(params[:per_page]).to_a
+      else
+        Park.ransack(params[:q]).result.page(params[:page]).per(params[:per_page]).to_a
+      end
     end
 
     render :json => { status: 200, data: @parks }

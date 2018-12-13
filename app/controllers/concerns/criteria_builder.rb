@@ -8,8 +8,10 @@ module CriteriaBuilder
       criteria = {}
     end
 
-    criteria["per_page"] = params["per_page"]
+    criteria["near"]     = params["near"]
+    criteria["radius"]   = params["radius"]
     criteria["page"]     = params["page"]
+    criteria["per_page"] = params["per_page"]
     return criteria.sort.to_s
   end
 end

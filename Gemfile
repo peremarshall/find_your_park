@@ -30,6 +30,7 @@ gem "pry-rails"
 gem "curb"
 gem "ransack"
 gem "kaminari"
+gem "geocoder"
 
 group :production do
   gem 'pg'
